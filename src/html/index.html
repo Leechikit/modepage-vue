@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <meta name="wap-font-scale" content="no" />
+    <meta name="baidu-site-verification" content="dLxkRHz8uC" />
+    <meta content="" name="Keywords">
+    <meta content="" name="description">
+    <title>YY专题模板</title>
+    <link rel="stylesheet" href="//web.yystatic.com/public/global/base/css/mobile_reset.css?v=1">
+    <script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                };
+
+            // Abort if browser does not support addEventListener
+            recalc();
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+</head>
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+    <script src="//web.yystatic.com/public/global/jquery/jquery-1.8.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src='//res.wx.qq.com/open/js/jweixin-1.0.0.js' type="text/javascript"></script>
+    <script type="text/javascript" src="//web.yystatic.com/public/global/base/js/yymobile_api.min.js"></script>
+</body>
+</html>
