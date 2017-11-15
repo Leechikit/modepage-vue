@@ -42,7 +42,14 @@ module.exports = {
             use: [
                 'style-loader',
                 'css-loader',
-                'postcss-loader',
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        config: {
+                            path: 'tasks/postcss.config.js'
+                        }
+                    }
+                },
                 'sass-loader'
             ]
         }, {
@@ -93,13 +100,13 @@ module.exports = {
 };
 
 function getEntry() {
-    var jsPath = path.resolve('src', 'js');
+    var jsPath = path.resolve('src');
     var dirs = fs.readdirSync(jsPath);
     var matchs = [], files = {};
     dirs.forEach(function (item) {
         matchs = item.match(/(.+)\.js$/);
         if (matchs) {
-            files[matchs[1]] = path.resolve('src', 'js', item);
+            files[matchs[1]] = path.resolve('src', item);
         }
     });
     return files;

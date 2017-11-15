@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import indexPage from '../pages/indexPage.vue';
+import './js/register.js';
+import indexPage from './pages/indexPage.vue';
 
 Vue.use(VueRouter);
 
