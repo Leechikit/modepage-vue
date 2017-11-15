@@ -5,6 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var config = require('./config').default;
 var publicPath = config.publicPath;
+var outputPath = config.outputPath;
 
 module.exports = {
     //插件项
@@ -13,15 +14,17 @@ module.exports = {
             filename: 'html/index.html',
             template: 'src/html/index.html'
         }),
-        new webpack.optimize.CommonsChunkPlugin('js/common.js')
+        new webpack.optimize.CommonsChunkPlugin('common'),
+        //生成独立样式文件
+        new ExtractTextPlugin("css/[name].bundle.css")
     ],
-    devtool: 'source-map',
     //页面入口文件配置
     entry: getEntry(),
     //入口文件输出配置
     output: {
         filename: 'js/[name].bundle.js',
         chunkFilename: 'js/[name].js',
+        path: path.join(__dirname, outputPath),
         publicPath: publicPath
     },
     module: {
@@ -34,12 +37,21 @@ module.exports = {
             ]
         }, {
             test: /\.scss$/,
-            use: [
-                'style-loader',
-                'css-loader',
-                'postcss-loader',
-                'sass-loader'
-            ]
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            config: {
+                                path: 'tasks/postcss.config.js'
+                            }
+                        }
+                    },
+                    'sass-loader'
+                ]
+            })
         }, {
             test: /\.(png|jpg|gif)$/,
             use: [{
@@ -77,13 +89,13 @@ module.exports = {
 };
 
 function getEntry() {
-    var jsPath = path.resolve('src', 'js');
+    var jsPath = path.resolve('src');
     var dirs = fs.readdirSync(jsPath);
     var matchs = [], files = {};
     dirs.forEach(function (item) {
         matchs = item.match(/(.+)\.js$/);
         if (matchs) {
-            files[matchs[1]] = path.resolve('src', 'js', item);
+            files[matchs[1]] = path.resolve('src', item);
         }
     });
     return files;

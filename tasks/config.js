@@ -15,6 +15,6 @@ exports.default = {
 	//静态资源地址
 	publicPath: '//127.0.0.1:2333/',
 	//项目输出地址
-	outputPath: './dist/'
+	outputPath: '../dist/'
 }
 
