@@ -13,18 +13,18 @@
     const { mapGetters, mapActions } = createNamespacedHelpers('pic');
 
     export default {
-        computed:{
-            ...mapGetters([
-                'img',
-                'link'
-            ])
-        },
         props:[
             'moduleId'
         ],
         data() {
             return {
             }
+        },
+        computed:{
+            ...mapGetters([
+                'img',
+                'link'
+            ])
         },
         methods:{
             ...mapActions([
