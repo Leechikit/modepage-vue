@@ -6,39 +6,32 @@
     </section>
 </template>
 <script>
-    import './pic-section.scss';
-    import { gotoUrl } from '../../js/helper.js';
-    import { createNamespacedHelpers } from 'vuex'
+import './pic-section.scss';
+import { gotoUrl } from '../../js/helper.js';
+import { createNamespacedHelpers } from 'vuex';
+import pic_api from '../../handlers/pic.js';
 
-    const { mapGetters, mapActions } = createNamespacedHelpers('pic');
+const { mapGetters, mapActions } = createNamespacedHelpers('pic');
 
-    export default {
-        props:[
-            'moduleId'
-        ],
-        data() {
-            return {
-            }
-        },
-        computed:{
-            ...mapGetters([
-                'img',
-                'link'
-            ])
-        },
-        methods:{
-            ...mapActions([
-                'getPicData'
-            ]),
-            gotoUrl
-        },
-        created() {
-            //this.$store.dispatch('getPicData',{
-            //    moduleId: this.moduleId
-            //});
-            this.getPicData({
-                moduleId: this.moduleId
-            })
+export default {
+    props: [
+        'moduleId'
+    ],
+    data() {
+        return {
+            img,
+            link
         }
+    },
+    methods: {
+        gotoUrl
+    },
+    created() {
+        pic_api.getPicData(moduleId)
+            .then(data => {
+                this.img = data.img;
+                this.link = data.img;
+            });
     }
+}
 </script>
