@@ -8,10 +8,7 @@
 <script>
 import './pic-section.scss';
 import { gotoUrl } from '../../js/helper.js';
-import { createNamespacedHelpers } from 'vuex';
 import pic_api from '../../handlers/pic.js';
-
-const { mapGetters, mapActions } = createNamespacedHelpers('pic');
 
 export default {
     props: [
@@ -19,18 +16,18 @@ export default {
     ],
     data() {
         return {
-            img,
-            link
+            img: '',
+            link: ''
         }
     },
     methods: {
         gotoUrl
     },
     created() {
-        pic_api.getPicData(moduleId)
+        pic_api.getPicData(this.moduleId)
             .then(data => {
                 this.img = data.img;
-                this.link = data.img;
+                this.link = data.link;
             });
     }
 }
