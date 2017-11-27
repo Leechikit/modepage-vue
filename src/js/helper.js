@@ -42,3 +42,21 @@ export function urlRepalce(url) {
     }
     return result;
 }
+
+export function dealNum(str, type) {
+    var num = parseInt(str);
+    var type = type || 1;
+    if (type == 1) {
+        // 当数值达到一定程度时，以万表示
+        if (num > 9999) {
+            //保留两位小数，四舍五入
+            var strnum = (num / 10000).toFixed(1) + "万";
+            return strnum;
+        } else if (num <= 9999) {
+            return strnum = divide(str);
+        }
+    } else if (type == 2) {
+        // 只做数据分隔，不以万表示
+        return strnum = divide(str);
+    }
+}
