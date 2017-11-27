@@ -22,10 +22,23 @@ export function api({ url, ...params }) {
 export const yyinfo = navigator.userAgent.match(/.*YY([\/\(])?(ClientVersion:)?([0-9\.]+).*/);
 
 export function gotoUrl(url) {
+    let formatUrl = urlRepalce(url);
     if (yyinfo) {
-        var encodeUrl = encodeURIComponent(url);
+        var encodeUrl = encodeURIComponent(formatUrl);
         window.YYApiCore.invokeClientMethod('ui', 'goto', { 'uri': 'yymobile://Web/Features/5/Url/' + encodeUrl });
     } else {
-        window.location.href = url;
+        window.location.href = formatUrl;
     }
+}
+
+export function urlRepalce(url) {
+    const PROTOCOLREG = new RegExp(/^https?:/);
+    const URLREG = new RegExp(/^www\..+/);
+    let result = url;
+    if (url && PROTOCOLREG.test(url)) {
+        result = url.replace(PROTOCOLREG, location.protocol);
+    } else if (URLREG.test(url)) {
+        result = `${location.protocol}//${url}`;
+    }
+    return result;
 }

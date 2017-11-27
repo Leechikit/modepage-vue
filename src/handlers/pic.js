@@ -8,6 +8,8 @@ export default {
         }).then(json => {
             if (json.code == 0) {
                 return json.data;
+            } else {
+               return Promise.reject('服务器错误');
             }
         })
     }
