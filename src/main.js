@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-// import './js/register.js';
+import './js/register.js';
 import store from './store';
 import indexPage from './pages/indexPage.vue';
 
