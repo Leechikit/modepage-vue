@@ -58,10 +58,10 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 8192,
-                    prefix: 'img'
+                    fallback: 'file-loader',                    
+                    name: '[name].[ext]?[hash:8]',
+                    outputPath: 'image/'
                 }
-            }, {
-                loader: 'file-loader?name=image/[name].[ext]?[hash]'
             }]
         }, {
             test: /\.vue$/,
